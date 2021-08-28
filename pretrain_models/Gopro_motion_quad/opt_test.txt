@@ -1,0 +1,37 @@
+------------ Options -------------
+aspect_ratio: 1.0
+batchSize: 8
+blur_direction: reblur
+checkpoints_dir: pretrain_models
+continue_train: False
+dataroot: /home/yjz/datasets/Gopro_align_data
+dataset_mode: aligned
+display_id: 0
+display_port: 8097
+display_single_pane_ncols: 0
+display_winsize: 256
+fineSize: 256
+gpu_ids: [1]
+how_many: 5000
+input_nc: 3
+isTrain: False
+loadSizeX: 720
+loadSizeY: 1280
+max_dataset_size: inf
+model: dcn
+nThreads: 2
+n_offset: 15
+name: Gopro_motion_quad
+no_crop: True
+no_flip: False
+ntest: inf
+offset_method: quad
+output_nc: 3
+phase: test
+resize_or_crop: resize_and_crop
+results_dir: ./exp_results/
+serial_batches: False
+verbose: False
+which_direction: AtoB
+which_epoch: latest
+-------------- End ----------------
