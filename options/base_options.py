@@ -24,7 +24,6 @@ class BaseOptions():
 		self.parser.add_argument('--continue_train', action='store_true', help='continue training: load the latest model')
 		self.parser.add_argument('--dataset_mode', type=str, default='aligned', help='chooses how datasets are loaded. [unaligned | aligned | single]')
 		self.parser.add_argument('--model', type=str, default='dcn', help='chooses which model to use. pix2pix, test, content_gan')
-		self.parser.add_argument('--which_direction', type=str, default='AtoB', help='AtoB or BtoA')
 		self.parser.add_argument('--nThreads', default=2, type=int, help='# threads for loading data')
 		self.parser.add_argument('--checkpoints_dir', type=str, default='./checkpoints', help='models are saved here')
 		self.parser.add_argument('--serial_batches', action='store_true', help='if true, takes images in order to make batches, otherwise takes them randomly')
