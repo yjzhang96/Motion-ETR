@@ -68,7 +68,7 @@ def define_blur(gpu_ids=[]):
 
 
 
-def define_deblur_DMPHN_decoder_offset(input_nc, nf, n_offset, offset_method, norm_layer=nn.BatchNorm2d,gpu_ids=[]):
+def define_deblur_offset(input_nc, nf, n_offset, offset_method, norm_layer=nn.BatchNorm2d,gpu_ids=[]):
     net_deblur = None
     use_gpu = len(gpu_ids) > 0
 

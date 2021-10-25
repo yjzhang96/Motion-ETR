@@ -31,7 +31,7 @@ class MA_Deblur(BaseModel):
 		# define netwrks
                 
 		self.n_offset=opt.n_offset
-		self.MANet = networks.define_deblur_offset_decoder001(input_nc=3,nf=16,n_offset=self.n_offset , offset_method=opt.offset_method, gpu_ids=self.gpu_ids)
+		self.MANet = networks.define_deblur_offset(input_nc=3,nf=16,n_offset=self.n_offset , offset_method=opt.offset_method, gpu_ids=self.gpu_ids)
 		self.blur_net = networks.define_blur(gpu_ids=self.gpu_ids)      # deformable
 		self.pretrain_offset_net = networks.define_offset_quad(input_nc=3,nf=16,n_offset=self.n_offset , norm='batch', gpu_ids=self.gpu_ids)
 
