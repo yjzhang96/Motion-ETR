@@ -285,8 +285,8 @@ class BlurNet(nn.Module):
         mask = torch.ones(B,1,H,W).cuda() 
         
         # real_B = self.pad(real_B)
-        fake_B = self.Dcn(real_B,offset,mask)
-        return fake_B
+        fake_A = self.Dcn(real_B,offset,mask)
+        return fake_A
  
 
 

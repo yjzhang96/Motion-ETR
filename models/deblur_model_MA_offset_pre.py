@@ -181,23 +181,20 @@ class MA_Deblur(BaseModel):
 
 
 	def vis_everyframe(self):
+		## Once you have deblured image and estimated motion offsets.
+		## This function can be used for extracting video frame from the blurry image. 
 		B,C,H,W = self.fake_B.shape
 		offset_N = torch.chunk(self.offsets, self.n_offset, dim=1)
 		fake_A_n = torch.zeros(B,C*self.n_offset,H,W).cuda()
 		with torch.no_grad():
 			for i in range(len(offset_N)):
 				fake_A_n[:,i*3:(i+1)*3,:,:] = self.blur_net(self.fake_B,offset_N[i])
-		# order = np.array([0,7,6,5,4,3,2,14,8,9,10,11,12,13,1])
+
 		frames = torch.chunk(fake_A_n,self.n_offset,dim=1)
-		# img_path = self.get_image_paths()
-		# root, short_path = os.path.split(img_path[0])
-		# # root, dir = os.path.split(root)
-		# name = os.path.splitext(short_path)[0]
 		frames_order = []
 		order = np.arange(self.n_offset)
 		mid = self.n_offset//2
 		order[1:mid] = np.arange(mid-1,0,-1)
-		print(order)
 		for i in range(len(frames)):
 			frame_i = frames[order[i]]
 			frame_np = util.tensor2im(frame_i)
@@ -205,6 +202,8 @@ class MA_Deblur(BaseModel):
 		return frames_order
 	
 	def draw_quadratic_line(self):
+		# This fuction can visualize the quadratic motion trajectory in a blur kernel form 
+		# as we shown in paper.
 		import cv2
 		offset_gpu = self.offsets
 		base_img = self.real_A.cpu().detach().numpy()
@@ -230,17 +229,11 @@ class MA_Deblur(BaseModel):
 				offset_ij = offset[:,:,i+inter//2, j+inter//2]
 				
 				offset_ij = np.round(offset_ij[order])
-				# print(offset_ij.shape,offset_ij)
-
 				indexes = offset_ij + window_center
-				
-				# import ipdb; ipdb.set_trace()
 				indexes = np.flip(indexes)
-				# indexes = np.clip(indexes,0,inter-1)
-				# import ipdb; ipdb.set_trace()
+
 				cv2.polylines(window,np.int32([indexes]),False,color=(255,0,0),thickness=1)
 				flow_map[i:i+inter,j:j+inter] = window
-		# import ipdb; ipdb.set_trace()
 
 		return flow_map
 
