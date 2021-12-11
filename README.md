@@ -1,5 +1,6 @@
 # Motion-ETR
 Exposure Trajectory Recovery from Motion Blur
+Youjian Zhang, Chaoyue Wang, Dacheng Tao
 
 ## How to run
 
