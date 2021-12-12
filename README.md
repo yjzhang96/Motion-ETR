@@ -1,11 +1,15 @@
 # Motion-ETR (official pytorch implementation)
-This repository provides the official PyTorch implementation of the [paper](https://ieeexplore.ieee.org/abstract/document/9551756/) accepted in TPAMI:
+[[paper]](https://ieeexplore.ieee.org/abstract/document/9551756/) [[video]](https://drive.google.com/file/d/1TnNUFoDy2VQ8pI4mUph92WTKG68Y5F7s/view?usp=sharing)
+
+This repository provides the official PyTorch implementation of the paper accepted in TPAMI:
 
 >Exposure Trajectory Recovery from Motion Blur 
 > 
->Youjian Zhang, Chaoyue Wang, Dacheng Tao
+>Youjian Zhang, Chaoyue Wang, Stephen J. Maybank, Dacheng Tao
 >
 >Abstract: Motion blur in dynamic scenes is an important yet challenging research topic. Recently, deep learning methods have achieved impressive performance for dynamic scene deblurring. However, the motion information contained in a blurry image has yet to be fully explored and accurately formulated because: (i) the ground truth of dynamic motion is difficult to obtain; (ii) the temporal ordering is destroyed during the exposure; and (iii) the motion estimation from a blurry image is highly ill-posed. By revisiting the principle of camera exposure, motion blur can be described by the relative motions of sharp content with respect to each exposed position. In this paper, we define exposure trajectories, which represent the motion information contained in a blurry image and explain the causes of motion blur. A novel motion offset estimation framework is proposed to model pixel-wise displacements of the latent sharp image at multiple timepoints. Under mild constraints, our method can recover dense, (non-)linear exposure trajectories, which significantly reduce temporal disorder and ill-posed problems. Finally, experiments demonstrate that the recovered exposure trajectories not only capture accurate and interpretable motion information from a blurry image, but also benefit motion-aware image deblurring and warping-based video extraction tasks.
+
+<img src= "https://github.com/yjzhang96/Motion-ETR/blob/main/pics/reblur_pipeline.png" width="70%">
 
 ---
 ## Contents
@@ -45,7 +49,7 @@ sh run_train.sh
 ```
 Note that you can replace the argument ```offset_mode``` from ```lin/bilin/quad``` to decide the constraint of the estimated trajectory as ```linear/bi-linear/quadratic```
 
-- To train the deblurring model, run the same command and change the argument ```blur_direction``` to ```deblur```
+- To train the deblurring model, run the same command and change the argument ```blur_direction``` from ```"reblur"``` to ```"deblur"```
 
 
 ### Test
@@ -53,9 +57,19 @@ Note that you can replace the argument ```offset_mode``` from ```lin/bilin/quad`
 ```bash
 sh run_test.sh
 ```
-- To train the deblurring model, run the same command and change the argument ```blur_direction``` to ```deblur```
+- To train the deblurring model, run the same command and change the argument ```blur_direction``` from ```"reblur"``` to ```"deblur"```
 
 
 ### Performance
 We provide some examples of our quadratic exposure trajectory and the cooresponding reblurred images.
-<img src= "https://github.com/chosj95/MIMO-UNet/blob/main/img/Graph.jpg" width="50%">
+
+<img src= "https://github.com/yjzhang96/Motion-ETR/blob/main/pics/eg_exposure_trajectory.png" width="90%">
+
+### Model
+We have put the pretrained motion offset model in directory ```./pretrain_models/MTR_Gopro_quad```, and we will provide other models which mentioned in the paper in the Google drive.
+
+|   Model     |  Zero constraint    |   Linear   |   Bi-linear   |   Quadratic   |
+| :---------: |     :-------:       |  :-------: |   :--------:  |   :---------: |
+|     PSNR    |     35.82           |   33.45    |      33.79    |    34.68      |
+|    SSIM     |     0.9800          |   0.9669   |      0.9687   |    0.9740     |
+
