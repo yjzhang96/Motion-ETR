@@ -31,7 +31,7 @@ class MA_Deblur(BaseModel):
 		# define netwrks
                 
 		self.n_offset=opt.n_offset
-		self.MANet = networks.define_deblur_offset(input_nc=3,nf=16,n_offset=self.n_offset , offset_method=opt.offset_method, gpu_ids=self.gpu_ids)
+		self.MANet = networks.define_deblur_offset(input_nc=3,nf=16,n_offset=self.n_offset , offset_mode=opt.offset_mode, gpu_ids=self.gpu_ids)
 		self.blur_net = networks.define_blur(gpu_ids=self.gpu_ids)      # deformable
 		self.pretrain_offset_net = networks.define_offset_quad(input_nc=3,nf=16,n_offset=self.n_offset , norm='batch', gpu_ids=self.gpu_ids)
 
@@ -50,7 +50,7 @@ class MA_Deblur(BaseModel):
 			_, self.contentLoss = init_loss(opt, self.Tensor)		
 
 			# self.load_network offset
-			# offset_network_path = os.path.join( opt.checkpoints_dir,'offset_%s' %(opt.offset_method), '%s_net_%s.pth' % ('latest', 'offset'))
+			# offset_network_path = os.path.join( opt.checkpoints_dir,'offset_%s' %(opt.offset_mode), '%s_net_%s.pth' % ('latest', 'offset'))
 			if len(self.gpu_ids)>1:
 				self.MANet.module.offset_net.load_state_dict(torch.load(offset_network_path))
 			else:

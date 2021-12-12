@@ -34,7 +34,7 @@ class Bluring_model_Q(BaseModel):
 
 		# define netwrks
         self.n_offset = opt.n_offset
-        self.offset_net = networks.define_offset_quad(input_nc=3,nf=16,n_offset=self.n_offset, offset_method=opt.offset_method, norm='batch', gpu_ids=self.gpu_ids)
+        self.offset_net = networks.define_offset_quad(input_nc=3,nf=16,n_offset=self.n_offset, offset_mode=opt.offset_mode, norm='batch', gpu_ids=self.gpu_ids)
         self.blur_net = networks.define_blur(gpu_ids=self.gpu_ids)      # deformable
         
         if self.is_train:

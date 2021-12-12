@@ -37,14 +37,14 @@ def get_norm_layer(norm_type='instance'):
     return norm_layer
 
 
-def define_offset_quad(input_nc, nf, n_offset,offset_method='quad', norm='batch', gpu_ids=[]):
+def define_offset_quad(input_nc, nf, n_offset,offset_mode='quad', norm='batch', gpu_ids=[]):
     net_offset = None
     use_gpu = len(gpu_ids) > 0
     norm_layer = get_norm_layer(norm_type=norm)
 
     if use_gpu:
         assert (torch.cuda.is_available())
-    net_offset = OffsetNet_quad(input_nc,nf,n_offset,offset_method=offset_method,norm_layer=norm_layer,gpu_ids=gpu_ids)
+    net_offset = OffsetNet_quad(input_nc,nf,n_offset,offset_mode=offset_mode,norm_layer=norm_layer,gpu_ids=gpu_ids)
 
     if use_gpu:
         # net_offset.cuda(gpu_ids[0])
@@ -68,13 +68,13 @@ def define_blur(gpu_ids=[]):
 
 
 
-def define_deblur_offset(input_nc, nf, n_offset, offset_method, norm_layer=nn.BatchNorm2d,gpu_ids=[]):
+def define_deblur_offset(input_nc, nf, n_offset, offset_mode, norm_layer=nn.BatchNorm2d,gpu_ids=[]):
     net_deblur = None
     use_gpu = len(gpu_ids) > 0
 
     if use_gpu:
         assert (torch.cuda.is_available())
-    net_deblur = DMPHN_decoder_offset(input_nc,nf,n_offset, offset_method, norm_layer=norm_layer, gpu_ids=[])
+    net_deblur = DMPHN_decoder_offset(input_nc,nf,n_offset, offset_mode, norm_layer=norm_layer, gpu_ids=[])
     if use_gpu:
         net_deblur.to(gpu_ids[0])
         # import ipdb; ipdb.set_trace()
@@ -168,15 +168,15 @@ class Bottleneck(nn.Module):
 
 class OffsetNet_quad(nn.Module):
     # offset for Start and End Points, then calculate a quadratic function
-    def __init__(self, input_nc, nf, n_offset, offset_method='quad', norm_layer=nn.BatchNorm2d,gpu_ids=[]):
+    def __init__(self, input_nc, nf, n_offset, offset_mode='quad', norm_layer=nn.BatchNorm2d,gpu_ids=[]):
         super(OffsetNet_quad,self).__init__()
         self.input_nc = input_nc
         self.nf = nf
         self.n_offset = n_offset   
-        self.offset_method = offset_method
-        if offset_method == 'quad' or offset_method == 'bilin':
+        self.offset_mode = offset_mode
+        if offset_mode == 'quad' or offset_mode == 'bilin':
             output_nc = 2 * 2
-        elif offset_method == 'lin':
+        elif offset_mode == 'lin':
             output_nc = 1 * 2
         
         use_dropout = False
@@ -253,14 +253,14 @@ class OffsetNet_quad(nn.Module):
 
         out = self.conv_out_0(F.relu(u_conv3))
         # quadratic or bilinear
-        if self.offset_method == 'quad' or self.offset_method == 'bilin':
+        if self.offset_mode == 'quad' or self.offset_mode == 'bilin':
             offset_SPoint = out[:,:2,:,:]
             offset_EPoint = out[:,2:,:,:]
-            if self.offset_method == 'quad':
+            if self.offset_mode == 'quad':
                 offset_S_0, offset_0_E = self.Quad_traj(offset_SPoint,offset_EPoint)
             else:
                 offset_S_0, offset_0_E = self.Bilinear_traj(offset_SPoint,offset_EPoint)
-        elif self.offset_method == 'lin':
+        elif self.offset_mode == 'lin':
             # linear
             offset_SPoint = out
             offset_EPoint = 0 - out
@@ -509,13 +509,13 @@ class DMPHN_decoder_offset_001(nn.Module):
 
 
 class DMPHN_decoder_offset(nn.Module):
-    def __init__(self, input_nc, nf, n_offset, offset_method, norm_layer=nn.BatchNorm2d,gpu_ids=[]):
+    def __init__(self, input_nc, nf, n_offset, offset_mode, norm_layer=nn.BatchNorm2d,gpu_ids=[]):
         super(DMPHN_decoder_offset,self).__init__()
         self.input_nc = input_nc
         self.nf = nf
         self.n_offset = n_offset
         
-        self.offset_net = OffsetNet_quad(input_nc,nf,n_offset,offset_method=offset_method, norm_layer=norm_layer,gpu_ids=gpu_ids) 
+        self.offset_net = OffsetNet_quad(input_nc,nf,n_offset,offset_mode=offset_mode, norm_layer=norm_layer,gpu_ids=gpu_ids) 
         self.deblur_net = DMPHN_decoder_offset_001()  #decoder 001
 
     

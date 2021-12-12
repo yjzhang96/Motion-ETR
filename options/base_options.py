@@ -19,7 +19,7 @@ class BaseOptions():
 		self.parser.add_argument('--n_offset', type=int, default=15, help='# of offsets')
 		self.parser.add_argument('--gpu_ids', type=str, default='0', help='gpu ids: e.g. 0  0,1,2, 0,2. use -1 for CPU')
 		self.parser.add_argument('--name', type=str, default='test', help='name of the experiment. It decides where to store samples and models')
-		self.parser.add_argument('--offset_method', type=str, default='none', help='name of the experiment: NC/ lin/ bilin/ quads')
+		self.parser.add_argument('--offset_mode', type=str, default='none', help='name of the experiment: NC/ lin/ bilin/ quad')
 		self.parser.add_argument('--blur_direction', type=str, default='deblur', help='deblur/reblur')
 		self.parser.add_argument('--continue_train', action='store_true', help='continue training: load the latest model')
 		self.parser.add_argument('--dataset_mode', type=str, default='aligned', help='chooses how datasets are loaded. [unaligned | aligned | single]')
