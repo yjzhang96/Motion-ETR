@@ -7,17 +7,11 @@ def create_model(opt):
 	model = None
 	if opt.model == 'test':
 		assert (opt.dataset_mode == 'single')
-		# from .test_model import TestModel
-		if opt.blur_direction == 'deblur':
-			model = MA_Deblur(opt)
-		elif opt.blur_direction == 'reblur':
-			model = Bluring_model_Q( opt )
-		# pass
-	else:                         
-		if opt.blur_direction == 'deblur':
-			model = MA_Deblur(opt)
-		elif opt.blur_direction == 'reblur':
-			model = Bluring_model_Q( opt )
+		
+	if opt.blur_direction == 'deblur':
+		model = MA_Deblur(opt)
+	elif opt.blur_direction == 'reblur':
+		model = Bluring_model_Q( opt )
 
 	# model.initialize(opt)
 	print("model [%s] was created" % (model.name()))

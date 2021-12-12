@@ -9,7 +9,7 @@ This repository provides the official PyTorch implementation of the paper accept
 >
 >Abstract: Motion blur in dynamic scenes is an important yet challenging research topic. Recently, deep learning methods have achieved impressive performance for dynamic scene deblurring. However, the motion information contained in a blurry image has yet to be fully explored and accurately formulated because: (i) the ground truth of dynamic motion is difficult to obtain; (ii) the temporal ordering is destroyed during the exposure; and (iii) the motion estimation from a blurry image is highly ill-posed. By revisiting the principle of camera exposure, motion blur can be described by the relative motions of sharp content with respect to each exposed position. In this paper, we define exposure trajectories, which represent the motion information contained in a blurry image and explain the causes of motion blur. A novel motion offset estimation framework is proposed to model pixel-wise displacements of the latent sharp image at multiple timepoints. Under mild constraints, our method can recover dense, (non-)linear exposure trajectories, which significantly reduce temporal disorder and ill-posed problems. Finally, experiments demonstrate that the recovered exposure trajectories not only capture accurate and interpretable motion information from a blurry image, but also benefit motion-aware image deblurring and warping-based video extraction tasks.
 
-<img src= "https://github.com/yjzhang96/Motion-ETR/blob/main/pics/reblur_pipeline.png" width="70%">
+<img src= "https://github.com/yjzhang96/Motion-ETR/blob/main/pics/reblur_pipeline.png" width="90%">
 
 ---
 ## Contents
@@ -66,10 +66,13 @@ We provide some examples of our quadratic exposure trajectory and the coorespond
 <img src= "https://github.com/yjzhang96/Motion-ETR/blob/main/pics/eg_exposure_trajectory.png" width="90%">
 
 ### Model
-We have put the pretrained motion offset model in directory ```./pretrain_models/MTR_Gopro_quad```, and we will provide other models which mentioned in the paper in the Google drive.
+We have put the pretrained quadratic model in directory ```./pretrain_models/MTR_Gopro_quad```, and we will provide other models which mentioned in the paper in the Google drive.
 
-|   Model     |  Zero constraint    |   Linear   |   Bi-linear   |   Quadratic   |
+|   Model     |  [Zero constraint](https://drive.google.com/drive/u/0/folders/1GpFlyj-gxb1QhBB_THssn-b1LE8Zdkeu)    |   [Linear](https://drive.google.com/drive/u/0/folders/1GpFlyj-gxb1QhBB_THssn-b1LE8Zdkeu)   |   [Bi-linear](https://drive.google.com/drive/u/0/folders/1twsAvk7kJ7XdtR2rfiHq7ZqkSJLi3dp3)   |   [Quadratic](https://drive.google.com/drive/u/0/folders/1GpFlyj-gxb1QhBB_THssn-b1LE8Zdkeu)   |
 | :---------: |     :-------:       |  :-------: |   :--------:  |   :---------: |
 |     PSNR    |     35.82           |   33.45    |      33.79    |    34.68      |
 |    SSIM     |     0.9800          |   0.9669   |      0.9687   |    0.9740     |
+
+Also, we provide our pretrained motion-aware deblurring [model](https://drive.google.com/drive/u/0/folders/1GpFlyj-gxb1QhBB_THssn-b1LE8Zdkeu).
+
 
