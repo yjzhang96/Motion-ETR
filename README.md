@@ -68,11 +68,11 @@ We provide some examples of our quadratic exposure trajectory and the coorespond
 ### Model
 We have put the pretrained quadratic model in directory ```./pretrain_models/MTR_Gopro_quad```, and we will provide other models which mentioned in the paper in the Google drive.
 
-|   Model     |  [Zero constraint](https://drive.google.com/drive/u/0/folders/1GpFlyj-gxb1QhBB_THssn-b1LE8Zdkeu)    |   [Linear](https://drive.google.com/drive/u/0/folders/1GpFlyj-gxb1QhBB_THssn-b1LE8Zdkeu)   |   [Bi-linear](https://drive.google.com/drive/u/0/folders/1twsAvk7kJ7XdtR2rfiHq7ZqkSJLi3dp3)   |   [Quadratic](https://drive.google.com/drive/u/0/folders/1GpFlyj-gxb1QhBB_THssn-b1LE8Zdkeu)   |
+|   Model     |  [Zero constraint](https://drive.google.com/drive/u/0/folders/1A9DMoxk32z79uNhDqZK6ZSzr5MwNTAZ1)    |   [Linear](https://drive.google.com/drive/u/0/folders/1GpFlyj-gxb1QhBB_THssn-b1LE8Zdkeu)   |   [Bi-linear](https://drive.google.com/drive/u/0/folders/1twsAvk7kJ7XdtR2rfiHq7ZqkSJLi3dp3)   |   [Quadratic](https://drive.google.com/drive/u/0/folders/1UtDGOcCa_PWT0-xA5erGz4pbUCCpJmIw)   |
 | :---------: |     :-------:       |  :-------: |   :--------:  |   :---------: |
 |     PSNR    |     35.82           |   33.45    |      33.79    |    34.68      |
 |    SSIM     |     0.9800          |   0.9669   |      0.9687   |    0.9740     |
 
-Also, we provide our pretrained motion-aware deblurring [model](https://drive.google.com/drive/u/0/folders/1GpFlyj-gxb1QhBB_THssn-b1LE8Zdkeu).
+Also, we provide our pretrained motion-aware deblurring [model](https://drive.google.com/drive/u/0/folders/1keoykuKd4-aLrhFrd6P_WnwYr0br-AUh).
 
 
