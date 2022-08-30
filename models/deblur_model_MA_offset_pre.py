@@ -35,7 +35,7 @@ class MA_Deblur(BaseModel):
 		self.blur_net = networks.define_blur(gpu_ids=self.gpu_ids)      # deformable
 		self.pretrain_offset_net = networks.define_offset_quad(input_nc=3,nf=16,n_offset=self.n_offset , norm='batch', gpu_ids=self.gpu_ids)
 
-		offset_network_path = os.path.join( 'path_to_pretrain_offset_model')
+		offset_network_path = os.path.join( './pretrain_models/MTR_Gopro_quad/latest_net_offset.pth')
 		if len(self.gpu_ids)>1:
 			self.pretrain_offset_net.module.load_state_dict(torch.load(offset_network_path))
 		else:
@@ -65,7 +65,7 @@ class MA_Deblur(BaseModel):
 
 		if not self.isTrain or opt.continue_train:
 			self.load_network(self.MANet, 'deblur', opt.which_epoch)
-			
+			self.save_network(self.MANet, 'deblur', 'new', self.gpu_ids)	
 				
 			if opt.continue_train:
 				self.old_lr = opt.lr - opt.lr*(opt.epoch_count-opt.niter)/opt.niter_decay
