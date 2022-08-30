@@ -1,10 +1,10 @@
-offset_method=quad
-name=MTR_Gopro_${offset_method}
-blur_direction=reblur    # reblur/deblur
+offset_mode=quad
+name=MTRdeblur_${offset_mode}
+blur_direction=deblur    # reblur/deblur
 
 python test.py \
        --name=$name \
-       --offset_method=${offset_method} \
+       --offset_mode=${offset_mode} \
        --gpu_ids=1 \
        --no_crop \
        --blur_direction=${blur_direction} \

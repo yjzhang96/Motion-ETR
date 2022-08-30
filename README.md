@@ -53,11 +53,11 @@ Note that you can replace the argument ```offset_mode``` from ```lin/bilin/quad`
 
 
 ### Test
-- To train motion offset estimation model, run the following command:
+- To test motion offset estimation model, run the following command:
 ```bash
 sh run_test.sh
 ```
-- To train the deblurring model, run the same command and change the argument ```blur_direction``` from ```"reblur"``` to ```"deblur"```
+- To test the deblurring model, run the same command and change the argument ```blur_direction``` from ```"reblur"``` to ```"deblur"```
 
 
 ### Performance
@@ -73,6 +73,6 @@ We have put the pretrained quadratic model in directory ```./pretrain_models/MTR
 |     PSNR    |     35.82           |   33.45    |      33.79    |    34.68      |
 |    SSIM     |     0.9800          |   0.9669   |      0.9687   |    0.9740     |
 
-Also, we provide our pretrained motion-aware deblurring [model](https://drive.google.com/drive/u/0/folders/1keoykuKd4-aLrhFrd6P_WnwYr0br-AUh).
+Also, we provide our pretrained motion-aware deblurring [model](https://drive.google.com/file/d/1EuAqj2gx9Yy9T1ryfeBLYdSBZADRvlpx/view?usp=sharing).
 
 
